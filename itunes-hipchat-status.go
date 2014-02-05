@@ -115,7 +115,8 @@ func viewHipChatUser(e, a string) HipChatUser {
 func getItunesInformation() string {
 	appleScriptRuntime := "osascript"
 	arg0 := "-e"
-	cmd := exec.Command(appleScriptRuntime, arg0, `tell application "iTunes"
+	cmd := exec.Command(appleScriptRuntime, arg0, `if application "iTunes" is running then
+tell application "iTunes"
 set trackname to name of current track
 set artistname to artist of current track
 set albumname to album of current track
@@ -133,7 +134,7 @@ end tell`)
 
 	out, err := cmd.Output()
 	if err != nil {
-		log.Fatal(err)
+		return ""
 	}
 
 	iTunesInformation := strings.TrimSpace(string(out))
