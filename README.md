@@ -24,7 +24,7 @@ From the commandline you can utilize the application by passing in your HipChat 
 ./itunes-hipchat-status -user=yourname@domain.com -token=XXXXXXXXXXXXXXXXXXXXXXXXXX
 ```
 
-A more appropriate usage is to schedule the updater to run on a cron schedule of every 15 or 30 seconds.
+A more appropriate usage is to schedule the updater to run on a cron schedule of every minute.
 
 
 ## License
