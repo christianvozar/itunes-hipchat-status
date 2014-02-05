@@ -119,6 +119,7 @@ func getItunesInformation() string {
 	appleScriptRuntime := "osascript"
 	arg0 := "-e"
 	cmd := exec.Command(appleScriptRuntime, arg0, `tell application "iTunes"
+if it is running then
 set trackname to name of current track
 set artistname to artist of current track
 set albumname to album of current track
@@ -132,6 +133,7 @@ set artistshow to " | " & artistname & ""
 end if
 
 set output to trackname & artistshow
+end if
 end tell`)
 
 	out, err := cmd.Output()
