@@ -53,6 +53,7 @@ func main() {
 	flagVersion := flag.Bool("version", false, "Display application version.")
 	flagUser := flag.String("user", "", "Atlassian HipChat ID or Email of user to update.")
 	flagAuthToken := flag.String("token", "", "Atlassian HipChat API v2 authentication token.")
+	flagPlayer := flag.String("player", "iTunes", "AppleScript-friendly name of player application.")
 	flag.Parse()
 
 	// Handle no command-line paramters
@@ -68,7 +69,7 @@ func main() {
 	}
 
 	userInformation := viewHipChatUser(*flagUser, *flagAuthToken)
-	userInformation.Presence.Status = getItunesInformation()
+	userInformation.Presence.Status = getPlayerInformation(*flagPlayer)
 	if userInformation.Presence.Show == "" {
 		userInformation.Presence.Show = "chat"
 	}
@@ -115,10 +116,10 @@ func viewHipChatUser(e, a string) HipChatUser {
 	return hipChatData
 }
 
-func getItunesInformation() string {
+func getPlayerInformation(player string) string {
 	appleScriptRuntime := "osascript"
 	arg0 := "-e"
-	cmd := exec.Command(appleScriptRuntime, arg0, `tell application "iTunes"
+	template := `tell application "%s"
 if it is running then
 set trackname to name of current track
 set artistname to artist of current track
@@ -134,19 +135,21 @@ end if
 
 set output to trackname & artistshow
 end if
-end tell`)
+end tell`
+	raw_cmd := fmt.Sprintf(template, player)
+	cmd := exec.Command(appleScriptRuntime, arg0, raw_cmd)
 
 	out, err := cmd.Output()
 	if err != nil {
 		return ""
 	}
 
-	iTunesInformation := strings.TrimSpace(string(out))
+	playerInformation := strings.TrimSpace(string(out))
 
 	// HipChat status cannot exceed 50 characters.
-	if len(iTunesInformation) > 50 {
-		return iTunesInformation[0:46] + "..."
+	if len(playerInformation) > 50 {
+		return playerInformation[0:46] + "..."
 	}
 
-	return iTunesInformation
+	return playerInformation
 }
