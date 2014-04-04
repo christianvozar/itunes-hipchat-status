@@ -1,10 +1,10 @@
-# Apple iTunes to Atlassian HipChat Status
+# Music Player to Atlassian HipChat Status
 
-A simple application that takes the current track and artist from iTunes and updates your Atlassian HipChat status to reflect.
+A simple application that takes the current track and artist from iTunes or Spotify and updates your Atlassian HipChat status to reflect.
 
 ## Requirements
 
-- While the application is written in Google Go, it will spawn a process that utilizes AppleScript to check iTunes for the current track. So any OSX should do but this is tested against the latest release, 10.9.
+- While the application is written in Google Go, it will spawn a process that utilizes AppleScript to check iTunes/Spotify for the current track. So any OSX should do but this is tested against the latest release, 10.9.
 - Compilation requires Google Go 1.2
 - Atlassian HipChat account
 
