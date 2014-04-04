@@ -1,4 +1,4 @@
-# Music Player to Atlassian HipChat Status
+# iTunes/Spotify to Atlassian HipChat Status
 
 A simple application that takes the current track and artist from iTunes or Spotify and updates your Atlassian HipChat status to reflect.
 
