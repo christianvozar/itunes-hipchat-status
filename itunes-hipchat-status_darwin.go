@@ -30,10 +30,13 @@ import (
 )
 
 const (
-	HipChatApiUrl     = "https://api.hipchat.com"
-	HipChatApiVersion = "v2"
+	// HipChatAPIURL is the Atlassian HipChat API endpoint for requests.
+	HipChatAPIURL = "https://api.hipchat.com"
+	// HipChatAPIVersion is the Atlassian HipChat API version to utilize.
+	HipChatAPIVersion = "v2"
 )
 
+// HipChatUser is a container for the Atlassian HipChat API User object.
 type HipChatUser struct {
 	Name         string       `json:"name,omitempty"`
 	Title        string       `json:"title,omitempty"`
@@ -77,7 +80,7 @@ func main() {
 }
 
 func updateHipChatUser(u HipChatUser, e, a string) {
-	messageUri := fmt.Sprintf("%s/%s/user/%s?auth_token=%s", HipChatApiUrl, HipChatApiVersion, e, a)
+	messageURI := fmt.Sprintf("%s/%s/user/%s?auth_token=%s", HipChatAPIURL, HipChatAPIVersion, e, a)
 
 	messagePayload, err := json.Marshal(u)
 	if err != nil {
@@ -87,7 +90,7 @@ func updateHipChatUser(u HipChatUser, e, a string) {
 	body := strings.NewReader(string(messagePayload))
 
 	httpClient := &http.Client{}
-	req, err := http.NewRequest("PUT", messageUri, body)
+	req, err := http.NewRequest("PUT", messageURI, body)
 	req.Header.Add("content-type", "application/json")
 
 	_, err = httpClient.Do(req)
@@ -99,8 +102,8 @@ func updateHipChatUser(u HipChatUser, e, a string) {
 func viewHipChatUser(e, a string) HipChatUser {
 	var hipChatData HipChatUser
 
-	messageUri := fmt.Sprintf("%s/%s/user/%s?auth_token=%s", HipChatApiUrl, HipChatApiVersion, e, a)
-	res, err := http.Get(messageUri)
+	messageURI := fmt.Sprintf("%s/%s/user/%s?auth_token=%s", HipChatAPIURL, HipChatAPIVersion, e, a)
+	res, err := http.Get(messageURI)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -136,8 +139,8 @@ end if
 set output to trackname & artistshow
 end if
 end tell`
-	raw_cmd := fmt.Sprintf(template, player)
-	cmd := exec.Command(appleScriptRuntime, arg0, raw_cmd)
+	rawCmd := fmt.Sprintf(template, player)
+	cmd := exec.Command(appleScriptRuntime, arg0, rawCmd)
 
 	out, err := cmd.Output()
 	if err != nil {
