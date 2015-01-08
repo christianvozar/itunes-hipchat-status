@@ -1,6 +1,6 @@
 # iTunes/Spotify to Atlassian HipChat Status
 
-A simple application that takes the current track and artist from iTunes or Spotify and updates your Atlassian HipChat status to reflect.
+A simple application that takes the current track and artist from iTunes or Spotify and updates your [Atlassian HipChat](https://www.atlassian.com/software/hipchat) status to reflect.
 
 ## Requirements
 
@@ -25,20 +25,3 @@ From the commandline you can utilize the application by passing in your HipChat 
 ```
 
 A more appropriate usage is to schedule the updater to run on a cron schedule of every 3 minutes. (Every 3 minutes is due to the rate limits imposed by the HipChat API)
-
-
-## License
-
-Copyright 2014, Rogue Ethic, Inc.
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-     http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
