@@ -1,3 +1,18 @@
 language: go
+script: true
+sudo: false
+
 go:
-  - 1.4
+  - 1.5
+  - tip
+
+before_install:
+  - go get github.com/golang/lint/golint
+
+install:
+  - go get
+  - go build
+
+script:
+  - go test ./...
+  - $HOME/gopath/bin/golint ./...
