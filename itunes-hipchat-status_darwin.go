@@ -114,6 +114,7 @@ func getPlayerInformation(player string) string {
 	arg0 := "-e"
 	template := `tell application "%s"
 if it is running then
+if player state is playing then
 set trackname to name of current track
 set artistname to artist of current track
 set albumname to album of current track
@@ -127,6 +128,9 @@ set artistshow to " | " & artistname & ""
 end if
 
 set output to trackname & artistshow
+else
+set output to ""
+end if
 end if
 end tell`
 	rawCmd := fmt.Sprintf(template, player)
